@@ -69,12 +69,19 @@ public class Bluetooth extends AppCompatActivity {
 
         // 如果适配器是null,那么不支持蓝牙
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "不知道蓝牙", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "不支持蓝牙", Toast.LENGTH_LONG).show();
             finish();
             return;
         }
     }
 
+    public void onclick(View v){
+//        Toast.makeText(this, "链接", Toast.LENGTH_LONG).show();
+
+        // 启动DeviceListActivity看到设备和做扫描
+        Intent serverIntent = new Intent(this, DeviceListActivity.class);
+        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+    }
     @Override
     public void onStart() {
         super.onStart();
