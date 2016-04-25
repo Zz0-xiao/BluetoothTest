@@ -12,10 +12,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
+
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -113,6 +113,7 @@ public class DeviceListActivity extends AppCompatActivity {
         // 注销广播听众
         this.unregisterReceiver(mReceiver);
     }
+
     /**
      * 开始与BluetoothAdapter设备发现
      */

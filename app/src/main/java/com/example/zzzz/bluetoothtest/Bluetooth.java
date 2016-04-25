@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -65,6 +64,7 @@ public class Bluetooth extends AppCompatActivity {
         if (D) Log.e(TAG, "+++ ON CREATE +++");
         setContentView(R.layout.activity_bluetooth);
         // 获取本地蓝牙适配器
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // 如果适配器是null,那么不支持蓝牙
@@ -103,7 +103,7 @@ public class Bluetooth extends AppCompatActivity {
         // onResume ACTION_REQUEST_ENABLE活动时()将返回。
         if (mChatService != null) {
             // 只有状态是STATE_NONE,我们已经知道,我们还没有开始
-            if (mChatService.getState() == BluetoothChatService.STATE_NONE) {
+            if (mChatService.getState() == BluetoothService.STATE_NONE) {
                 // 启动蓝牙聊天服务
                 mChatService.start();
             }
@@ -184,19 +184,19 @@ public class Bluetooth extends AppCompatActivity {
     }
 
     //    // EditText部件的动作侦听器,侦听返回键
-//    private TextView.OnEditorActionListener mWriteListener =
-//            new TextView.OnEditorActionListener() {
-//                public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
-//                    // 如果操作是一个激励的事件返回键,发送消息
-//                    if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
-//                        String message = view.getText().toString();
-//                        sendMessage(message);
-//                    }
-//                    if(D) Log.i(TAG, "END onEditorAction");
-//                    return true;
-//                }
-//            };
-// 处理程序从BluetoothChatService回来的信息
+    private TextView.OnEditorActionListener mWriteListener =
+            new TextView.OnEditorActionListener() {
+                public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
+                    // 如果操作是一个激励的事件返回键,发送消息
+                    if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
+                        String message = view.getText().toString();
+                        sendMessage(message);
+                    }
+                    if (D) Log.i(TAG, "END onEditorAction");
+                    return true;
+                }
+            };
+    // 处理程序从BluetoothChatService回来的信息
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

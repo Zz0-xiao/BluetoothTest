@@ -284,7 +284,7 @@ public class BluetoothService {
 
                 // 如果一个连接被接受
                 if (socket != null) {
-                    synchronized (BluetoothChatService.this) {
+                    synchronized (BluetoothService.this) {
                         switch (mState) {
                             case STATE_LISTEN:
                             case STATE_CONNECTING:
